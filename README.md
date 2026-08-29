@@ -2,66 +2,55 @@
   <img src="assets/netsec-forge-logo.png" alt="NetSec Forge logo" width="180">
 </p>
 
-# NetSec Windows Setup
+# NetSec Forge
 
-تطبيق Windows مباشر لإعداد جهاز جديد لمهام البرمجة والشبكات والأمن المعلوماتي. يفتح المستخدم ملفًا واحدًا باسم `NetSecSetup.exe`، يختار التطبيقات، ثم يضغط زر التثبيت — من دون كتابة أوامر PowerShell أو تثبيت .NET أو VS Code أو Git مسبقًا.
+A one-click Windows setup tool for programming, networking, and cybersecurity work. Open a single file, `NetSecSetup.exe`, pick the apps you need, and hit install — no PowerShell commands, no pre-installed .NET, VS Code, or Git required.
 
-## المزايا
+## Features
 
-- واجهة رسومية مباشرة مع وضعي النهار والليل.
-- حزم مرتبة حسب المجال: الأساسيات، التطوير، المتصفحات، الشبكات والأمن، والهندسة العكسية.
-- تثبيت تلقائي للاعتمادات الضرورية: Docker Desktop يضيف WSL، وGhidra يضيف Java JDK 21 عند الحاجة.
-- سجل واضح لنتيجة كل عملية تثبيت.
+- Clean graphical interface with light and dark mode.
+- Apps grouped by category: Essentials, Development, Browsers, Networking & Security, and Reverse Engineering.
+- Automatic handling of dependencies: Docker Desktop enables WSL, Ghidra pulls in Java JDK 21 when needed.
+- Clear install log for every operation.
 
-## الحزم في الإصدار الأول
+## Included Packages (v1)
 
-| المجال | التطبيقات |
+| Category | Apps |
 | --- | --- |
-| الأساسيات | WinRAR أو 7-Zip |
-| التطوير | WSL + Ubuntu، .NET SDK، VS Code، Python، Git، Docker Desktop |
-| المتصفحات | Brave، Google Chrome، DuckDuckGo Browser |
-| الشبكات والأمن | GNS3، Nmap، Wireshark، Proton VPN |
-| الهندسة العكسية | Ghidra مع Java JDK 21 تلقائيًا |
+| Essentials | WinRAR or 7-Zip |
+| Development | WSL + Ubuntu, .NET SDK, VS Code, Python, Git, Docker Desktop |
+| Browsers | Brave, Google Chrome, DuckDuckGo Browser |
+| Networking & Security | GNS3, Nmap, Wireshark, Proton VPN |
+| Reverse Engineering | Ghidra (with Java JDK 21 auto-installed) |
 
-WinRAR و7-Zip بديلان؛ اختيار أحدهما يلغي الآخر. يحتاج Proton VPN إلى تسجيل الدخول إلى حسابك بعد تثبيته.
+WinRAR and 7-Zip are alternatives — picking one deselects the other. Proton VPN requires signing in to your account after install.
 
-## استخدام التطبيق الجاهز
+## Requirements
 
-- Windows 10 أو Windows 11.
-- اتصال إنترنت.
-- قبول نافذة الصلاحيات الإدارية في Windows؛ هذا مطلوب خصوصًا لتثبيت WSL.
-- `winget` / **App Installer**؛ يكون موجودًا عادةً في Windows 11. إن لم يكن موجودًا، يفتح التطبيق صفحته الرسمية في Microsoft Store.
+- Windows 10 or Windows 11.
+- An internet connection.
+- Administrator approval via the standard Windows UAC prompt (required for WSL installation).
+- `winget` / **App Installer** — included by default on most Windows 11 systems. If missing, the app opens its Microsoft Store page automatically.
 
-هذه متطلبات نظام Windows، وليست برامج ينبغي للمستخدم تثبيتها يدويًا قبل تشغيل التطبيق.
+These are Windows system requirements, not something you need to install manually before running the app.
 
-## بناء التطبيق والنشر
+## Building From Source
 
-صاحب المشروع يبني التطبيق مرة واحدة فقط، ثم يرفع ملف `NetSecSetup.exe` الناتج إلى قسم **Releases** في GitHub. أي مستخدم يمكنه تنزيل الملف وتشغيله مباشرة بعد ذلك.
+Build once, then distribute the generated `NetSecSetup.exe` — no need for the .NET SDK or NuGet packages, since it targets the .NET Framework already included in Windows 10/11.
 
-تعليمات البناء التفصيلية موجودة في [BUILD.md](BUILD.md). باختصار: انقر مرتين على `Build-PortableExe.cmd`، ثم ستجد ملف التطبيق في `publish\NetSecSetup.exe`.
+See [BUILD.md](BUILD.md) for details. In short: double-click `Build-PortableExe.cmd`, and the compiled app will appear at:
 
-هذا الإصدار يستعمل .NET Framework الموجود أساسًا في Windows 10 و11، لذلك لا يحتاج ملف التشغيل إلى .NET SDK أو حزم NuGet أو أي تنزيلات مسبقة.
-
-## ملاحظات مهمة
-
-- بعد تثبيت WSL أو Docker Desktop قد تحتاج إلى إعادة تشغيل الكمبيوتر، ثم فتح Ubuntu لأول مرة لإنشاء اسم مستخدم وكلمة مرور لينكس.
-- يحتاج Docker Desktop إلى تفعيل الافتراضية الافتراضية من BIOS/UEFI على بعض الأجهزة.
-- GNS3 هو البرنامج الأساسي فقط؛ صور الأجهزة، وGNS3 VM، وCisco Packet Tracer ليست جزءًا من التثبيت التلقائي لأنّها تتطلب تنزيلات أو تراخيص منفصلة.
-- الحزم وخيارات الواجهة موجودة في [Program.cs](src/NetSecSetupClassic/Program.cs).
-
-## النشر على GitHub
-
-```powershell
-git init
-git add .
-git commit -m "Initial Windows setup installer"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/NetSec-Windows-Setup.git
-git push -u origin main
+```
+publish\NetSecSetup.exe
 ```
 
-استبدل `YOUR-USERNAME` باسم المستخدم الخاص بك، وأنشئ مستودعًا فارغًا بالاسم نفسه في GitHub قبل تنفيذ السطرين الأخيرين.
+## Notes
 
-## الترخيص
+- After installing WSL or Docker Desktop, a restart may be required, followed by opening Ubuntu once to set a Linux username and password.
+- Docker Desktop requires virtualization enabled in BIOS/UEFI on some machines.
+- GNS3 installs the core application only — device images, the GNS3 VM, and Cisco Packet Tracer are not part of the automated install since they require separate downloads or licenses.
+- Package options and UI logic live in [Program.cs](src/NetSecSetupClassic/Program.cs).
 
-المشروع متاح بموجب ترخيص MIT. راجع ملف [LICENSE](LICENSE).
+## License
+
+MIT License — see [LICENSE](LICENSE).
