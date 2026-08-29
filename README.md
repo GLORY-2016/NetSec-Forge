@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/netsec-forge-logo.png" alt="NetSec Forge logo" width="180">
+  <img src="assets/netsec-forge-logo.png" alt="NetSec Forge logo" width="200">
 </p>
 
 # NetSec Forge
@@ -12,6 +12,7 @@ A one-click Windows setup tool for programming, networking, and cybersecurity wo
 - Apps grouped by category: Essentials, Development, Browsers, Networking & Security, and Reverse Engineering.
 - Automatic handling of dependencies: Docker Desktop enables WSL, Ghidra pulls in Java JDK 21 when needed.
 - Clear install log for every operation.
+- **Automatic updates**: The app checks for newer versions on startup and updates itself silently from GitHub releases.
 
 ## Included Packages (v1)
 

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,7 +18,149 @@ namespace NetSecSetup
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
+            // Check for updates before launching the UI
+            if (CheckAndApplyUpdates())
+            {
+                return; // Application was updated and restarted
+            }
+            
             Application.Run(new SetupForm());
+        }
+
+        private static bool CheckAndApplyUpdates()
+        {
+            try
+            {
+                var currentVersion = GetLocalVersion();
+                var latestVersion = GetLatestVersionFromGitHub();
+                
+                if (latestVersion == null || currentVersion >= latestVersion)
+                {
+                    return false; // No update needed
+                }
+
+                // Update is available
+                var localExePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                var downloadUrl = GetDownloadUrlFromGitHub(latestVersion);
+                
+                if (string.IsNullOrEmpty(downloadUrl))
+                {
+                    return false;
+                }
+
+                var backupPath = localExePath + ".backup";
+                var tempPath = Path.Combine(Path.GetTempPath(), "NetSecSetup_Update.exe");
+
+                // Download the new version
+                using (var client = new WebClient())
+                {
+                    client.DownloadFile(downloadUrl, tempPath);
+                }
+
+                if (!File.Exists(tempPath) || new FileInfo(tempPath).Length == 0)
+                {
+                    return false; // Download failed
+                }
+
+                // Backup current version and replace
+                if (File.Exists(localExePath))
+                {
+                    if (File.Exists(backupPath))
+                    {
+                        File.Delete(backupPath);
+                    }
+                    File.Move(localExePath, backupPath);
+                }
+
+                File.Move(tempPath, localExePath);
+
+                // Restart the application
+                Process.Start(localExePath);
+                return true;
+            }
+            catch
+            {
+                // Silent fail - allow app to run with current version
+                return false;
+            }
+        }
+
+        private static Version GetLocalVersion()
+        {
+            try
+            {
+                var versionFile = Path.Combine(
+                    Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
+                    ".version");
+                
+                if (File.Exists(versionFile))
+                {
+                    var versionString = File.ReadAllText(versionFile).Trim();
+                    return new Version(versionString);
+                }
+
+                // Fallback: read from assembly
+                var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                return assembly.GetName().Version ?? new Version("1.0.0.0");
+            }
+            catch
+            {
+                return new Version("1.0.0.0");
+            }
+        }
+
+        private static Version GetLatestVersionFromGitHub()
+        {
+            try
+            {
+                var url = "https://api.github.com/repos/GLORY-2016/NetSec-Forge/releases/latest";
+                using (var client = new WebClient())
+                {
+                    client.Headers.Add("User-Agent", "NetSecSetup");
+                    var json = client.DownloadString(url);
+                    
+                    // Extract version from tag_name (e.g., "v1.0.1" -> "1.0.1")
+                    var match = System.Text.RegularExpressions.Regex.Match(json, "\"tag_name\":\"v?([0-9.]+)\"");
+                    if (match.Success)
+                    {
+                        return new Version(match.Groups[1].Value);
+                    }
+                }
+            }
+            catch
+            {
+                // Silent fail - no internet or API error
+            }
+            return null;
+        }
+
+        private static string GetDownloadUrlFromGitHub(Version version)
+        {
+            try
+            {
+                var url = "https://api.github.com/repos/GLORY-2016/NetSec-Forge/releases/latest";
+                using (var client = new WebClient())
+                {
+                    client.Headers.Add("User-Agent", "NetSecSetup");
+                    var json = client.DownloadString(url);
+                    
+                    // Extract download URL for NetSecSetup.exe
+                    var match = System.Text.RegularExpressions.Regex.Match(
+                        json, 
+                        "\"browser_download_url\":\"([^\"]*NetSecSetup\\.exe)\"");
+                    
+                    if (match.Success)
+                    {
+                        return match.Groups[1].Value;
+                    }
+                }
+            }
+            catch
+            {
+                // Silent fail
+            }
+            return null;
         }
     }
 
