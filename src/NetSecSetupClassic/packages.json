@@ -1,0 +1,198 @@
+{
+  "Packages": [
+    {
+      "Name": "WinRAR",
+      "Id": "RARLab.WinRAR",
+      "Description": "Archive manager (commercial, trial available).",
+      "Category": "Essentials",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": true,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "7-Zip",
+      "Id": "7zip.7zip",
+      "Description": "Free, open-source archive manager.",
+      "Category": "Essentials",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Python",
+      "Id": "Python.Python.3.13",
+      "Description": "Python programming language.",
+      "Category": "Development",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": true,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Git",
+      "Id": "Git.Git",
+      "Description": "Version-control system.",
+      "Category": "Development",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": true,
+      "UseNameLookup": false
+    },
+    {
+      "Name": ".NET SDK",
+      "Id": "Microsoft.DotNet.SDK.10",
+      "Description": ".NET 10 SDK (LTS).",
+      "Category": "Development",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": true,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Visual Studio Code",
+      "Id": "Microsoft.VisualStudioCode",
+      "Description": "Lightweight code editor.",
+      "Category": "Development",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Visual Studio",
+      "Id": "Microsoft.VisualStudio.2022.Community",
+      "Description": "Full-featured IDE for .NET and C++ development (Community edition).",
+      "Category": "Development",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": true,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Docker Desktop",
+      "Id": "Docker.DockerDesktop",
+      "Description": "Containers and local development environments.",
+      "Category": "Development",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "WSL + Ubuntu",
+      "Id": "Ubuntu",
+      "Description": "Linux environment for Windows.",
+      "Category": "Development",
+      "InstallerKind": "Wsl",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Google Chrome",
+      "Id": "Google.Chrome",
+      "Description": "Google web browser.",
+      "Category": "Web Browsers",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Brave",
+      "Id": "Brave.Brave",
+      "Description": "Privacy-focused browser.",
+      "Category": "Web Browsers",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Mozilla Firefox",
+      "Id": "Mozilla.Firefox",
+      "Description": "Open-source privacy-focused browser.",
+      "Category": "Web Browsers",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "DuckDuckGo Browser",
+      "Id": "DuckDuckGo.DesktopBrowser",
+      "Description": "Privacy-focused web browser.",
+      "Category": "Web Browsers",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Wireshark",
+      "Id": "WiresharkFoundation.Wireshark",
+      "Description": "Network traffic analyzer.",
+      "Category": "Networking & Security",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Nmap",
+      "Id": "Insecure.Nmap",
+      "Description": "Network discovery and port scanner.",
+      "Category": "Networking & Security",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "GNS3",
+      "Id": "GNS3.GNS3",
+      "Description": "Network emulation platform.",
+      "Category": "Networking & Security",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Proton VPN",
+      "Id": "Proton.ProtonVPN",
+      "Description": "Privacy VPN client; sign-in required after installation.",
+      "Category": "Networking & Security",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Maltego CE",
+      "Id": "MaltegoTechnologies.MaltegoCE",
+      "Description": "Open-source intelligence and graph analysis.",
+      "Category": "Networking & Security",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Win11Debloat",
+      "Id": "Win11Debloat",
+      "Description": "Remove Windows bloatware, telemetry, and unwanted apps. (Recommended for advanced users)",
+      "Category": "System Utilities",
+      "InstallerKind": "GitHub",
+      "SelectedByDefault": false,
+      "UseNameLookup": false,
+      "GitHubUrl": "https://github.com/raphire/Win11Debloat"
+    },
+    {
+      "Name": "Java JDK 21",
+      "Id": "EclipseAdoptium.Temurin.21.JDK",
+      "Description": "Required by Ghidra; added automatically when needed.",
+      "Category": "Reverse Engineering",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": false
+    },
+    {
+      "Name": "Ghidra",
+      "Id": "Ghidra",
+      "Description": "Reverse-engineering framework.",
+      "Category": "Reverse Engineering",
+      "InstallerKind": "Winget",
+      "SelectedByDefault": false,
+      "UseNameLookup": true
+    }
+  ],
+  "Dependencies": {
+    "Docker Desktop": ["WSL + Ubuntu"],
+    "Ghidra": ["Java JDK 21"]
+  }
+}
